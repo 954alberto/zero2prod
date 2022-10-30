@@ -34,11 +34,10 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 impl DatabaseSettings {
     pub fn connection_string(&self) -> PgConnectOptions {
         let conn = PgConnectOptions::new()
-            .host("secret-host")
-            .port(2525)
-            .username("secret-user")
-            .password("secret-password")
-            .ssl_mode(PgSslMode::Require);
+            .host(&self.host)
+            .port(self.port)
+            .username(&self.username)
+            .password(&self.password);
         conn
     }
 }

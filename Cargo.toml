@@ -13,10 +13,11 @@ name = "zero2prod"
 
 [dependencies]
 actix-web = "4.0.0"
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+config = "0.13"
 log = "0.4.17"
 simple_logger = "3.0.0"
 serde = { version = "1", features = ["derive"]}
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
 [dev-dependencies]
 reqwest = "0.11"
@@ -32,3 +33,6 @@ features = [
     "chrono",
     "migrate" 
 ]
+
+[env]
+DATABASE_URL="postgres://postgres:password@localhost:5432/newsletter"

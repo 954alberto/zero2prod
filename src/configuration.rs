@@ -1,7 +1,4 @@
 //! src/configuration.rs
-
-use sqlx::{postgres::PgConnectOptions, ConnectOptions};
-
 #[derive(serde::Deserialize)]
 pub struct Settings {
     pub database: DatabaseSettings,

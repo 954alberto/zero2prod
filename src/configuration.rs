@@ -1,6 +1,6 @@
 //! src/configuration.rs
 
-use sqlx::postgres::{PgConnectOptions, PgSslMode};
+use sqlx::{postgres::PgConnectOptions, ConnectOptions};
 
 #[derive(serde::Deserialize)]
 pub struct Settings {
@@ -32,12 +32,10 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 }
 
 impl DatabaseSettings {
-    pub fn connection_string(&self) -> PgConnectOptions {
-        let conn = PgConnectOptions::new()
-            .host(&self.host)
-            .port(self.port)
-            .username(&self.username)
-            .password(&self.password);
-        conn
+    pub fn connection_string(&self) -> String {
+        format!(
+            "postgres://{}:{}@{}:{}/{}",
+            self.username, self.password, self.host, self.port, self.database_name
+        )
     }
 }
